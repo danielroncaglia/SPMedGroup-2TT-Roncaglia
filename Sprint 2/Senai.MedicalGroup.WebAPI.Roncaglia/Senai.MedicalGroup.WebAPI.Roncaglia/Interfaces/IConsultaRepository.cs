@@ -6,18 +6,27 @@ using System.Threading.Tasks;
 
 namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
 {
-    interface IConsultaRepository
+    public interface IConsultaRepository
     {
-        //Cadastra nova consulta
+        //Cadastrar nova consulta
         void cadastrarConsulta(Consultas consulta);
 
-        //Lista consultas de somente um médico
-        List<Consultas> ConsultasMedico(int Id);
+        //Listar consultas de somente um médico
+        List<Consultas> consultaporMedico(int Id);
 
-        //Lista consultas de somente um paciente
-        List<Consultas> ConsultasPaciente(int Id);
+        //Listar consultas de somente um paciente
+        List<Consultas> consultaporPaciente(int Id);
 
-        //Lista todas as consultas
-        List<Consultas> TodasConsultas();
+        //Listar todas as consultas
+        List<Consultas> todasConsultas();
+
+        //Apagar consulta
+        void apagarConsulta(int Id);
+
+        //Buscar consulta por id
+        Consultas consultasporID(int Id);
+
+        //Alterar consulta
+        void atualizarConsulta(Consultas consulta);
     }
 }

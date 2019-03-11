@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
 {
-    public class IPacienteRepository
+    internal interface IPacienteRepository
     {
-        List<Pacientes> ListarPaciente();
-    }
+        //Cadastrar nova consulta
+        void cadastrarPaciente(Pacientes paciente);
+
+        //Listar os pacientes
+        List<Pacientes> listarPacientes();
+
+        //Apagar paciente
+        void apagarPaciente(int Id);
+
 }

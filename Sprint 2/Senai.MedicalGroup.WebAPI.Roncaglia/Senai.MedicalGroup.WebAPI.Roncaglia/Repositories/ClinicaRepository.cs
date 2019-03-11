@@ -7,35 +7,35 @@ using System.Threading.Tasks;
 
 namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
 {
-    public class PacienteRepository : IPacienteRepository
+    public class ClinicaRepository : IClinicaRepository
     {
 
-        //Cadastra nova consulta
-        public void cadastrarPaciente(Pacientes paciente)
+        //Cadastrar nova clínica
+        public void cadastrarClinica(Clinica clinica)
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
-                ctx.Pacientes.Add(paciente);
+                ctx.Clinica.Add(clinica);
                 ctx.SaveChanges();
             }
         }
 
-        //Listar os pacientes
-        public List<Pacientes> listarPacientes()
+        //Listar todas as clínicas
+        public List<Clinica> listarClinica()
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
-                return ctx.Pacientes.ToList();
+                return ctx.Clinica.ToList();
             }
         }
 
-        //Apagar paciente
-        public void apagarPaciente(int Id)
+        //Apagar clínica
+        public void apagarClinica(int Id)
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
-                Pacientes pacienteProcurado = ctx.Pacientes.Find(Id);
-                ctx.Pacientes.Remove(pacienteProcurado);
+                Clinica clinicaProcurada = ctx.Clinica.Find(Id);
+                ctx.Clinica.Remove(clinicaProcurada);
                 ctx.SaveChanges();
             }
         }

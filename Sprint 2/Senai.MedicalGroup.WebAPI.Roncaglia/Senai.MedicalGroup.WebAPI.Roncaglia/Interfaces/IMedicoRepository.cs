@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
 {
-    public class IMedicoRepository
+    public interface IMedicoRepository
     {
-        List<Medicos> ListarMedicos();
+        //Cadastrar médicos
+        void cadastrarMedicos(Medicos medico);
+
+
+        //Listar médicos
+        List<Medicos> listarMedicos();
+
+        //Apagar médico
+        void apagarMedico(int Id);
+
     }
 }

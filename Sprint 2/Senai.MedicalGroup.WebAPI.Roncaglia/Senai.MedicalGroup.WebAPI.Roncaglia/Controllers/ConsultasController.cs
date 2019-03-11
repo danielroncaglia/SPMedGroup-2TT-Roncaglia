@@ -25,20 +25,96 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
 
         //Cadastrar nova consulta
         [HttpPost]
-        public IActionResult Post(Consultas consulta)
+        public IActionResult cadastrarConsultas(Consultas consulta)
         {
             try
             {
                 ConsultaRepository.cadastrarConsulta(consulta);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(new { mensagem = ex.Message });
             }
         }
-       
+
+        //Apagar consulta
+        public IActionResult Apagar(int id)
+        {
+            try
+            {
+                        ConsultaRepository.apagarConsulta(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
+
+        //Listar todas as consultas
+        [HttpGet]
+        public IActionResult todasConsultas()
+        {
+                try
+                {
+                   
+                        return Ok(ConsultaRepository.todasConsultas());
+                    
+                }
+                catch (Exception ex)
+                {
+                       return BadRequest(new { mensagem = ex.Message });
+                }
+        }
+
+        //Listar as consultas por paciente
+        [HttpGet("paciente/{id}")]
+        public IActionResult consultasporPaciente(int Id)
+        {
+            try
+            {
+
+                return Ok(ConsultaRepository.consultaporPaciente(Id));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
+
+        //Listar as consultas por medicos
+        [HttpGet("medico/{Id}")]
+        public IActionResult consultaporMedico(int Id)
+        {
+            try
+            {
+
+                return Ok(ConsultaRepository.consultaporMedico(Id));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
+
+        //Atualizar consulta
+        [HttpPut]
+        public IActionResult atualizarConsulta(Consultas consulta)
+        {
+            try
+            {
+               ConsultaRepository.atualizarConsulta(consulta);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+        }
+        
 
     }
 }

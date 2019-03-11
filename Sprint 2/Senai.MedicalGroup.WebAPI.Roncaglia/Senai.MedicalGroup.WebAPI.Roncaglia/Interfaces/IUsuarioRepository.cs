@@ -1,4 +1,5 @@
-﻿using Senai.MedicalGroup.WebAPI.Roncaglia.ViewModels;
+﻿using Senai.MedicalGroup.WebAPI.Roncaglia.Domains;
+using Senai.MedicalGroup.WebAPI.Roncaglia.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
 {
-    public interface IUsuarioRepository
+    interface IUsuarioRepository
     {
-        void Cadastrar(Domains.ViewModels usuario);
+        Usuarios BuscarPorEmailESenha(LoginViewModel login);
 
-        LoginViewModel BuscarPorEmailSenha(LoginViewModel Login);
+        void Cadastrar(Usuarios usuario);
     }
 }
