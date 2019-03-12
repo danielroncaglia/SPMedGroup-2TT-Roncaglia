@@ -27,7 +27,6 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Domains
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=.\\SqlExpress; Initial Catalog= SENAI_MEDICAL_GROUP_2TT; User ID = sa; Password = 132");
             }
         }

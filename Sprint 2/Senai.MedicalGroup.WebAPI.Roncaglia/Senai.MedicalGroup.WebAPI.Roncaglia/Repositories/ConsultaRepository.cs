@@ -20,20 +20,20 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
         }
 
         //Listar consultas de somente um médico
-        public List<Consultas> consultaporMedico(int Id)
+        public List<Consultas> consultaporMedico(int IdMedico)
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
-                return ctx.Consultas.Where(x => x.IdMedico == Id).ToList();
+                return ctx.Consultas.Where(x => x.IdMedico == IdMedico).ToList();
             }
         }
 
         //Listar consultas de somente um paciente
-        public List<Consultas> consultaporPaciente(int Id)
+        public List<Consultas> consultaporPaciente(int IdPaciente)
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
-                return ctx.Consultas.Where(x => x.IdPaciente == Id).ToList();
+                return ctx.Consultas.Where(x => x.IdPaciente == IdPaciente).ToList();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
         }
 
         //Buscar consulta por id
-        public Consultas consultasporID(int Id)
+        public Consultas consultasporId(int Id)
         {
             using (MedGroupContext ctx = new MedGroupContext())
             {
@@ -66,12 +66,22 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
             }
         }
 
-        public void atualizarConsulta(Consultas consulta)
+        public void atualizarConsulta(Consultas novaConsulta, Consultas consultaCadastrada)
         {
+
+            if (novaConsulta.SituacaoConsulta != null)
+            {
+                consultaCadastrada.SituacaoConsulta = novaConsulta.SituacaoConsulta;
+            }
+
+            if (novaConsulta.Outros != null)
+            {
+                consultaCadastrada.Outros = novaConsulta.Outros;
+            }
 
             using (MedGroupContext ctx = new MedGroupContext())
             { 
-                ctx.Consultas.Update(consulta);
+                ctx.Consultas.Update(consultaCadastrada);
                 ctx.SaveChanges();
             }
         }

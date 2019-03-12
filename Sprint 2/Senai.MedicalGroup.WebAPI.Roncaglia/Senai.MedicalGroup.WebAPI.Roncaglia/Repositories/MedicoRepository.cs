@@ -10,6 +10,15 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
     public class MedicoRepository : IMedicoRepository
     {
 
+        //Buscar por Id do médico
+        public Medicos buscarMedicoPorIdUsuario(int Idusuario)
+        {
+            using (MedGroupContext ctx = new MedGroupContext())
+            {
+                return ctx.Medicos.FirstOrDefault(x => x.IdUsuario == Idusuario);
+            }
+        }
+
         //Cadastrar médicos
         public void cadastrarMedicos(Medicos medico)
         {

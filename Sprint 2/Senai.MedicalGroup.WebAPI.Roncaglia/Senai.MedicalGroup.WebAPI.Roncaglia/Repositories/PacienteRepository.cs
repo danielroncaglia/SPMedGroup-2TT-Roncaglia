@@ -10,6 +10,15 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Repositories
     public class PacienteRepository : IPacienteRepository
     {
 
+        //Buscar por Id do paciente
+        public Pacientes buscarPacientePorIdUsuario(int Idusuario)
+        {
+            using (MedGroupContext ctx = new MedGroupContext())
+            {
+                return ctx.Pacientes.FirstOrDefault(x => x.IdUsuario == Idusuario);
+            }
+        }
+
         //Cadastra nova consulta
         public void cadastrarPaciente(Pacientes paciente)
         {

@@ -25,7 +25,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         {
             try
             {
-                return Ok(PacientesRepository.ListarPacientes());
+                return Ok(PacientesRepository.listarPacientes());
             }
             catch
             {

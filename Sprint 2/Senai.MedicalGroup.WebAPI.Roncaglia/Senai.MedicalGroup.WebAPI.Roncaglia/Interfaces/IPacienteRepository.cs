@@ -8,6 +8,10 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
 {
     internal interface IPacienteRepository
     {
+
+        //Buscar por Id do paciente
+        Pacientes buscarPacientePorIdUsuario(int Idusuario);
+
         //Cadastrar nova consulta
         void cadastrarPaciente(Pacientes paciente);
 
@@ -17,4 +21,5 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
         //Apagar paciente
         void apagarPaciente(int Id);
 
+    }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.MedicalGroup.WebAPI.Roncaglia.Domains;
@@ -17,14 +19,20 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
     {
         
         private IConsultaRepository ConsultaRepository { get; set; }
+        private IPacienteRepository PacienteRepository { get; set; }
+        private IMedicoRepository MedicoRepository { get; set; }
 
         public ConsultasController()
         {
             ConsultaRepository = new ConsultaRepository();
+            PacienteRepository = new PacienteRepository();
+            MedicoRepository = new MedicoRepository();
+
         }
 
         //Cadastrar nova consulta
         [HttpPost]
+        [Authorize(Roles = "Administrador")]
         public IActionResult cadastrarConsultas(Consultas consulta)
         {
             try
@@ -39,7 +47,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Apagar consulta
-        public IActionResult Apagar(int id)
+        public IActionResult apagarConsulta(int id)
         {
             try
             {
@@ -54,13 +62,12 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
 
         //Listar todas as consultas
         [HttpGet]
-        public IActionResult todasConsultas()
+        [Authorize(Roles = "Administrador")]
+        public IActionResult listarConsultas()
         {
                 try
                 {
-                   
-                        return Ok(ConsultaRepository.todasConsultas());
-                    
+                        return Ok(ConsultaRepository.todasConsultas());   
                 }
                 catch (Exception ex)
                 {
@@ -69,13 +76,25 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Listar as consultas por paciente
-        [HttpGet("paciente/{id}")]
-        public IActionResult consultasporPaciente(int Id)
+        [HttpGet("paciente")]
+        [Authorize(Roles = "Paciente")]
+        public IActionResult consultasporPaciente()
         {
             try
             {
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
 
-                return Ok(ConsultaRepository.consultaporPaciente(Id));
+                Pacientes pacienteProcurado = PacienteRepository.buscarPacientePorIdUsuario(IdUsuario);
+
+                if (pacienteProcurado == null)
+                {
+                    return NotFound(new
+                    {
+                        mensagem = "Paciente não encontrado."
+                    });
+                }
+
+                return Ok(ConsultaRepository.consultaporPaciente(pacienteProcurado.IdPaciente));
 
             }
             catch (Exception ex)
@@ -85,13 +104,25 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Listar as consultas por medicos
-        [HttpGet("medico/{Id}")]
-        public IActionResult consultaporMedico(int Id)
+        [HttpGet("medico")]
+        [Authorize(Roles = "Médico")]
+        public IActionResult consultasporMedico()
         {
             try
             {
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
 
-                return Ok(ConsultaRepository.consultaporMedico(Id));
+                Medicos medicoProcurado = MedicoRepository.buscarMedicoPorIdUsuario(IdUsuario);
+
+                if (medicoProcurado == null)
+                {
+                    return NotFound(new
+                    {
+                        mensagem = "Médico não encontrado."
+                    });
+                }
+
+                return Ok(ConsultaRepository.consultaporMedico(medicoProcurado.IdMedico));
 
             }
             catch (Exception ex)
@@ -102,11 +133,23 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
 
         //Atualizar consulta
         [HttpPut]
-        public IActionResult atualizarConsulta(Consultas consulta)
+        [Authorize(Roles = "Administrador, Medico")]
+        public IActionResult atualizarConsulta(Consultas novaConsulta)
         {
             try
             {
-               ConsultaRepository.atualizarConsulta(consulta);
+                Consultas consultaCadastrada = ConsultaRepository.consultasporId(novaConsulta.IdConsultas);
+
+                if (consultaCadastrada == null)
+                {
+                    return NotFound(new
+                    {
+                        mensagem = "Não encontrada"
+                    });
+                }
+
+                ConsultaRepository.atualizarConsulta(novaConsulta, consultaCadastrada);
+
                 return Ok();
             }
             catch (Exception ex)

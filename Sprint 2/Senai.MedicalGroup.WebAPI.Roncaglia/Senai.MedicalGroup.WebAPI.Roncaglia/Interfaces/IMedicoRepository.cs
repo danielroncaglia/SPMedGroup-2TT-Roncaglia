@@ -11,6 +11,8 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
         //Cadastrar médicos
         void cadastrarMedicos(Medicos medico);
 
+        //Buscar por Id do médico
+       Medicos buscarMedicoPorIdUsuario(int Idusuario);
 
         //Listar médicos
         List<Medicos> listarMedicos();

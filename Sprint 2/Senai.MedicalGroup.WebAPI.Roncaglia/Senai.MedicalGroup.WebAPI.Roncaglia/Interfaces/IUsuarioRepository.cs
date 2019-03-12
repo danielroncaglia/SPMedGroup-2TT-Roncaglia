@@ -11,6 +11,10 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
     {
         Usuarios BuscarPorEmailESenha(LoginViewModel login);
 
-        void Cadastrar(Usuarios usuario);
+        void CadastrarAdministrador(Usuarios usuario);
+
+        void CadastrarPaciente(PacienteViewModel pacienteModel);
+
+        void CadastrarMedico(MedicoViewModel medicoModel);
     }
 }

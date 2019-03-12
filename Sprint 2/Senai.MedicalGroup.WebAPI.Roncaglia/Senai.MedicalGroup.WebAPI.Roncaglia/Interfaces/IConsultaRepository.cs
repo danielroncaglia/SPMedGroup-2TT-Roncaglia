@@ -24,9 +24,9 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces
         void apagarConsulta(int Id);
 
         //Buscar consulta por id
-        Consultas consultasporID(int Id);
+        Consultas consultasporId(int Id);
 
         //Alterar consulta
-        void atualizarConsulta(Consultas consulta);
+        void atualizarConsulta(Consultas novaConsulta, Consultas consultaCadastrada);
     }
 }
