@@ -52,8 +52,8 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken(
-                    issuer: "MedGroup.WebApi",
-                    audience: "MedGroup.WebApi",
+                    issuer: "Senai.MedicalGroup.WebAPI.Roncaglia",
+                    audience: "Senai.MedicalGroup.WebAPI.Roncaglia",
                     claims: claims,
                     expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: creds

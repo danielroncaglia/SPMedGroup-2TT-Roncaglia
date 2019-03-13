@@ -64,3 +64,6 @@ BEGIN
 END
 GO
 EXEC BACKUP_BD
+
+
+select * from usuarios
