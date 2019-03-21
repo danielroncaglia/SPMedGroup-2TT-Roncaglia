@@ -31,7 +31,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Cadastrar nova consulta
-        [HttpPost]
+        [HttpPost("cadastrar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult cadastrarConsultas(Consultas consulta)
         {
@@ -47,6 +47,8 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Apagar consulta
+        [HttpPost("apagar")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult apagarConsulta(int id)
         {
             try
@@ -61,7 +63,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Listar todas as consultas
-        [HttpGet]
+        [HttpGet("listar")]
         [Authorize(Roles = "Administrador")]
         public IActionResult listarConsultas()
         {
@@ -77,7 +79,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
 
         //Listar as consultas por paciente
         [HttpGet("paciente")]
-        [Authorize(Roles = "Paciente")]
+        [Authorize(Roles = "Administrador, Paciente")]
         public IActionResult consultasporPaciente()
         {
             try
@@ -105,7 +107,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
 
         //Listar as consultas por medicos
         [HttpGet("medico")]
-        [Authorize(Roles = "Médico")]
+        [Authorize(Roles = "Aministrador, Médico")]
         public IActionResult consultasporMedico()
         {
             try
@@ -132,7 +134,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         }
 
         //Atualizar consulta
-        [HttpPut]
+        [HttpPut("atualizar")]
         [Authorize(Roles = "Administrador, Medico")]
         public IActionResult atualizarConsulta(Consultas novaConsulta)
         {

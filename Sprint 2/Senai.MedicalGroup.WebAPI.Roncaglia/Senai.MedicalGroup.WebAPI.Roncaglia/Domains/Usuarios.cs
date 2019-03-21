@@ -12,7 +12,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Domains
         }
 
         public int IdUsuario { get; set; }
-        public int? IdTipo { get; set; }
+        public int IdTipo { get; set; }
         public string EmailUsuario { get; set; }
         public string SenhaUsuario { get; set; }
 

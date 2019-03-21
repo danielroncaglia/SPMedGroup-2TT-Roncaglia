@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.MedicalGroup.WebAPI.Roncaglia.Interfaces;
@@ -21,6 +22,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
             PacientesRepository = new PacienteRepository();
         }
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
         public IActionResult get()
         {
             try

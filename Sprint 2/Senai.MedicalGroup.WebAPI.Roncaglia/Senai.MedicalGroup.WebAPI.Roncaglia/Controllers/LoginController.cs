@@ -47,7 +47,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
                     new Claim(ClaimTypes.Role, usuarioProcurado.IdTipoNavigation.TipoUsuario)
                 };
 
-                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("medgroup-autenticacao"));
+                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Senai.MedicalGroup.WebAPI.Roncaglia"));
 
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
