@@ -44,7 +44,8 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioProcurado.EmailUsuario),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioProcurado.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioProcurado.IdTipoNavigation.TipoUsuario)
+                    new Claim(ClaimTypes.Role, usuarioProcurado.IdTipoNavigation.TipoUsuario),
+                    new Claim("Role", usuarioProcurado.IdTipoNavigation.TipoUsuario)
                 };
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Senai.MedicalGroup.WebAPI.Roncaglia"));

@@ -57,9 +57,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia
             });
 
 
-
-
-            //Em breve
+           
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -79,9 +77,15 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia
 
             app.UseAuthentication();
 
+
             app.UseSwagger();
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SviGufo API");
+            });
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc();
 

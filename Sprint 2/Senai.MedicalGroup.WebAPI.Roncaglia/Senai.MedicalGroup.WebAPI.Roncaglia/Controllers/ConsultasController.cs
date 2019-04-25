@@ -33,7 +33,7 @@ namespace Senai.MedicalGroup.WebAPI.Roncaglia.Controllers
         //Cadastrar nova consulta
         [HttpPost("cadastrar")]
         [Authorize(Roles = "Administrador")]
-        public IActionResult cadastrarConsultas(Consultas consulta)
+        public IActionResult cadastrarConsulta(Consultas consulta)
         {
             try
             {
